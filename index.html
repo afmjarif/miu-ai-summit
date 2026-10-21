@@ -1,1 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIU CSE Club AI Summit 2026</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0A2540;
+            --accent: #00C2FF;
+            --bg: #F5F7FA;
+            --text: #1A1A1A;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: var(--bg); color: var(--text); }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0A2540 0%, #00C2FF 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        .hero h1 { font-size: 3rem; font-weight: 900; margin-bottom: 10px; }
+        .hero p { font-size: 1.2rem; margin-bottom: 20px; opacity: 0.9; }
+        .btn-register {
+            background: #FFD700; color: var(--primary);
+            padding: 15px 40px; border-radius: 50px;
+            text-decoration: none; font-weight: bold; font-size: 1.2rem;
+            display: inline-block; transition: transform 0.2s;
+        }
+        .btn-register:hover { transform: scale(1.05); }
 
+        /* Live Dashboard */
+        .dashboard {
+            display: flex; justify-content: center; gap: 20px;
+            padding: 40px 20px; background: white; margin-top: -30px;
+            border-radius: 20px; max-width: 900px;
+            margin-left: auto; margin-right: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .stat-box { text-align: center; }
+        .stat-box h2 { color: var(--accent); font-size: 2.5rem; margin-bottom: 5px; }
+        .stat-box p { color: #666; font-weight: 600; text-transform: uppercase; font-size: 0.9rem; }
+
+        /* Sections */
+        .section { padding: 60px 20px; max-width: 1000px; margin: auto; }
+        .section h2 { text-align: center; font-size: 2rem; color: var(--primary); margin-bottom: 40px; }
+        
+        /* Cards */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .card {
+            background: white; padding: 30px; border-radius: 12px;
+            text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .card h3 { color: var(--primary); margin-bottom: 10px; }
+        .card p { color: #666; font-size: 0.9rem; line-height: 1.5; }
+        .card img { width: 80px; height: 80px; border-radius: 50%; margin-bottom: 15px; object-fit: cover; }
+
+        /* Footer */
+        footer { text-align: center; padding: 30px; background: var(--primary); color: white; margin-top: 40px; }
+    </style>
+</head>
+<body>
+
+    <!-- Hero -->
+    <div class="hero">
+        <h1>AI SUMMIT 2026</h1>
+        <p>The Future of Jobs and Education in the Age of AI</p>
+        <a href="YOUR_GOOGLE_FORM_LINK_HERE" target="_blank" class="btn-register">Register Now 🚀</a>
+    </div>
+
+    <!-- Live Dashboard -->
+    <div class="dashboard">
+        <div class="stat-box">
+            <h2 id="total-reg">0</h2>
+            <p>Registered</p>
+        </div>
+        <div class="stat-box">
+            <h2 id="verified-reg">0</h2>
+            <p>Verified</p>
+        </div>
+        <div class="stat-box">
+            <h2 id="checked-in">0</h2>
+            <p>Checked In</p>
+        </div>
+    </div>
+
+    <!-- Organizers -->
+    <div class="section">
+        <h2>Organized By</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="https://afmjarif.github.io/miu-seminar-scanner/assets/logo.png" alt="MIU CSE Club">
+                <h3>MIU CSE Club</h3>
+                <p>Creating Tech Leaders of Tomorrow</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Guests -->
+    <div class="section" style="background: white; border-radius: 20px;">
+        <h2>Special Guests</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Guest Speaker 1</h3>
+                <p>AI Researcher & Tech Innovator</p>
+            </div>
+            <div class="card">
+                <h3>Guest Speaker 2</h3>
+                <p>Industry Expert</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Program Details -->
+    <div class="section">
+        <h2>Program Schedule</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>10:00 AM</h3>
+                <p>Registration & Welcome</p>
+            </div>
+            <div class="card">
+                <h3>11:00 AM</h3>
+                <p>Keynote Session</p>
+            </div>
+            <div class="card">
+                <h3>01:00 PM</h3>
+                <p>Lunch & Networking</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 MIU CSE Club. All rights reserved.</p>
+        <p>Contact: cse_club@manarat.ac.bd</p>
+    </footer>
+
+    <!-- Apps Script for Live Data -->
+    <script>
+        const API_URL = "https://script.google.com/macros/s/AKfycbzY2-Vrn2tmgsLO8H1g6tOy7tTusEWT6ZyFcsWkf3C3Q2oVz1-RC-h_df0lTst9ph-aWA/exec";
+
+        function fetchStats() {
+            const script = document.createElement('script');
+            script.src = API_URL + "?action=getWebsiteData&callback=updateStats";
+            document.body.appendChild(script);
+        }
+
+        function updateStats(data) {
+            if (data && data.success) {
+                // Animate numbers
+                animateValue("total-reg", 0, data.stats.total, 1000);
+                animateValue("verified-reg", 0, data.stats.verified, 1000);
+                animateValue("checked-in", 0, data.stats.checkedIn, 1000);
+            }
+        }
+
+        function animateValue(id, start, end, duration) {
+            const obj = document.getElementById(id);
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start);
+                if (progress < 1) window.requestAnimationFrame(step);
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Fetch stats every 30 seconds
+        fetchStats();
+        setInterval(fetchStats, 30000);
+    </script>
+</body>
+</html>
