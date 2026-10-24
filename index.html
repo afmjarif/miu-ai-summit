@@ -18,13 +18,21 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: var(--bg); color: var(--text); line-height: 1.6; }
         
-        /* Hero Section */
+        /* Hero Section with Banner */
         .hero {
             background: linear-gradient(135deg, #0A2540 0%, #00C2FF 100%);
             color: white;
-            padding: 100px 20px 80px;
+            padding: 40px 20px 80px;
             text-align: center;
             position: relative;
+        }
+        .hero-banner {
+            max-width: 900px;
+            width: 100%;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            border: 3px solid rgba(255,255,255,0.1);
         }
         .hero h1 { font-size: 3.5rem; font-weight: 900; margin-bottom: 10px; letter-spacing: -1px; text-transform: uppercase; }
         .hero h1 span { color: var(--gold); }
@@ -52,39 +60,84 @@
         .stat-box p { color: #666; font-weight: 700; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; }
 
         /* Sections */
-        .section { padding: 80px 20px; max-width: 1200px; margin: auto; }
+        .section { padding: 70px 20px; max-width: 1200px; margin: auto; }
         .section-header { text-align: center; margin-bottom: 50px; }
         .section-header h2 { font-size: 2.2rem; color: var(--primary); font-weight: 900; margin-bottom: 10px; }
         .section-header p { color: #666; font-size: 1.1rem; }
         
         /* Grid & Cards */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        
+        /* 3-Column Grid */
+        .grid-3 { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 30px; 
+            max-width: 1000px;
+            margin: 0 auto;
+        }
         
         .card {
-            background: var(--card-bg); padding: 35px 25px; border-radius: 16px;
+            background: var(--card-bg); padding: 30px 20px; border-radius: 16px;
             text-align: center; box-shadow: 0 8px 25px rgba(0,0,0,0.05);
             transition: transform 0.3s; border-top: 4px solid var(--accent);
-            display: flex; flex-direction: column; align-items: center;
+            display: flex; flex-direction: column; align-items: center; position: relative;
         }
         .card:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
         .card img { width: 120px; height: 120px; border-radius: 50%; margin-bottom: 20px; object-fit: cover; background: #eee; border: 3px solid var(--gold); }
-        .card h3 { color: var(--primary); margin-bottom: 5px; font-size: 1.3rem; font-weight: 800; }
-        .card .title { color: var(--accent); font-weight: 700; font-size: 0.9rem; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .card .details { color: #555; font-size: 0.95rem; line-height: 1.5; }
-
-        /* Special Layout for Leadership */
-        .leadership-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-bottom: 40px; }
+        .card h3 { color: var(--primary); margin-bottom: 5px; font-size: 1.2rem; font-weight: 800; line-height: 1.3;}
+        .card .title { color: var(--accent); font-weight: 700; font-size: 0.85rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .card .details { color: #555; font-size: 0.9rem; line-height: 1.5; margin-bottom: 15px;}
         
+        /* Profile Link Button */
+        .profile-btn {
+            margin-top: auto; text-decoration: none; font-size: 0.85rem;
+            color: var(--primary); font-weight: 700; border: 1px solid var(--primary);
+            padding: 5px 15px; border-radius: 20px; transition: 0.2s;
+        }
+        .profile-btn:hover { background: var(--primary); color: white; }
+
+        /* Schedule Table */
+        .schedule-container { overflow-x: auto; background: white; border-radius: 16px; box-shadow: 0 8px 25px rgba(0,0,0,0.05); }
+        .schedule-table { width: 100%; border-collapse: collapse; text-align: left; min-width: 600px; }
+        .schedule-table th, .schedule-table td { padding: 15px 20px; border-bottom: 1px solid #eee; }
+        .schedule-table th { background: var(--primary); color: white; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;}
+        .schedule-table tr:hover { background: #f9f9f9; }
+        .schedule-table .highlight { background: #f0f8ff; font-weight: 700; }
+        .schedule-table td:last-child { font-weight: 600; color: var(--accent); white-space: nowrap;}
+
+        /* ✅ Updated Volunteer Grid (Perfect Circles) */
+        .volunteer-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 20px; }
+        .volunteer-card { 
+            text-align: center; background: white; padding: 20px 10px; 
+            border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); 
+        }
+        .volunteer-card img { 
+            width: 80px; height: 80px; border-radius: 50%; /* Forces perfect circle */
+            object-fit: cover; margin-bottom: 12px; border: 2px solid var(--accent); 
+        }
+        .volunteer-card h4 { 
+            font-size: 0.85rem; color: var(--primary); 
+            font-weight: 700; line-height: 1.2; 
+        }
+
         /* Footer */
         footer { text-align: center; padding: 50px 20px; background: var(--primary); color: white; margin-top: 50px; }
         footer h3 { color: var(--gold); font-size: 1.5rem; margin-bottom: 10px; }
         footer p { opacity: 0.8; margin-bottom: 5px; }
+        footer a { color: var(--accent); text-decoration: none; font-weight: bold; }
+        footer a:hover { text-decoration: underline; }
 
+        /* Responsive */
+        @media (max-width: 992px) {
+            .grid-3 { grid-template-columns: repeat(2, 1fr); }
+        }
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
             .dashboard { flex-direction: column; gap: 20px; margin: -30px 20px 0; }
             .stat-box h2 { font-size: 2.5rem; }
             .section { padding: 50px 20px; }
+            .grid-3 { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -92,10 +145,10 @@
 
     <!-- Hero -->
     <div class="hero">
+        <img src="assets/banner.jpg" alt="AI Summit 2026 Banner" class="hero-banner">
         <h1>AI SUMMIT <span>2026</span></h1>
         <p>The Future of Jobs and Education in the Age of AI</p>
         <p style="font-size: 1rem; margin-bottom: 30px;">📍 MIU Auditorium | 📅 31 October 2026</p>
-        <!-- ⚠️ REPLACE WITH YOUR GOOGLE FORM LINK -->
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSeToPyP0lK1nPkDnOj0HXQEVV2jB5NxjSzwXZ3s8QoPIriUfw/viewform?usp=header" target="_blank" class="btn-register">Register Now 🚀</a>
     </div>
 
@@ -115,6 +168,40 @@
         </div>
     </div>
 
+    <!-- Top Leadership: Chief Guest, Chair, Special Guest -->
+    <div class="section" style="padding-bottom: 0;">
+        <div class="section-header">
+            <h2>Honorable Guests</h2>
+            <p>Leading the vision of AI Summit 2026</p>
+        </div>
+        <div class="grid-3">
+            <!-- Chief Guest -->
+            <div class="card" style="border-top: 4px solid var(--gold);">
+                <img src="assets/chiefg.jpg" alt="Prof. Dr. Mohammad Abdur Rob">
+                <h3>Prof. Dr. Mohammad Abdur Rob</h3>
+                <div class="title">Chief Guest</div>
+                <div class="details">Vice Chancellor (VC)<br>Manarat International University</div>
+                <a href="" target="_blank" class="profile-btn">View Profile</a>
+            </div>
+            <!-- Chair -->
+            <div class="card" style="border-top: 4px solid var(--gold);">
+                <img src="assets/convener.jpg" alt="Prof. Dr. Md. Mijanur Rahman">
+                <h3>Prof. Dr. Md. Mijanur Rahman</h3>
+                <div class="title">Chair of the Program</div>
+                <div class="details">Dean, School of Engineering<br>Head of CSE, MIU</div>
+                <a href="https://www.linkedin.com/in/md-mijanur-rahman-4298742a8/" target="_blank" class="profile-btn">View Profile</a>
+            </div>
+            <!-- Special Guest -->
+            <div class="card" style="border-top: 4px solid var(--gold);">
+                <img src="assets/specialguest.jpg" alt="Md. Ershadul H. Choudhury">
+                <h3>Md. Ershadul Haque Choudhury</h3>
+                <div class="title">Special Guest</div>
+                <div class="details">Professor & Head of EEE<br>Manarat International University</div>
+                <a href="https://eee.manarat.ac.bd/faculty/md-ershadul-h-choudhury" target="_blank" class="profile-btn">View Profile</a>
+            </div>
+        </div>
+    </div>
+
     <!-- Guests & Speakers Section -->
     <div class="section">
         <div class="section-header">
@@ -122,137 +209,179 @@
             <p>Industry leaders, innovators, and AI pioneers</p>
         </div>
         <div class="grid">
-            <!-- Guest 1 -->
             <div class="card">
                 <img src="assets/speaker1.jpg" alt="Dr. Muhammad Imadur Rahman">
                 <h3>Dr. Muhammad Imadur Rahman</h3>
                 <div class="title">Managing Director & CEO</div>
-                <div class="details">Bangladesh Satellite Company Limited (BSCL)<br>Researcher at Ericsson<br>Chairman, Muslim Aid Sweden</div>
+                <div class="details">BSCL<br>Researcher at Ericsson</div>
+                <a href="https://www.linkedin.com/in/imadur/" target="_blank" class="profile-btn">View Profile</a>
             </div>
-            <!-- Guest 2 -->
             <div class="card">
                 <img src="assets/speaker2.jpg" alt="Munir Hasan">
                 <h3>Munir Hasan</h3>
-                <div class="title">AI & Digital Transformation Advocate</div>
-                <div class="details">Consultant, Daily Prothom Alo<br>President, BDOSN</div>
+                <div class="title">AI Advocate</div>
+                <div class="details">Consultant, Prothom Alo<br>President, BDOSN</div>
+                <a href="https://www.linkedin.com/in/munir-hasan-97475a3a/" target="_blank" class="profile-btn">View Profile</a>
             </div>
-            <!-- Guest 3 -->
             <div class="card">
                 <img src="assets/speaker3.jpg" alt="Belal Ahmed">
                 <h3>Belal Ahmed</h3>
                 <div class="title">CEO, BITSCOL & AppValey</div>
                 <div class="details">Former Director, BASIS</div>
+                <a href="https://www.facebook.com/belal.ahmed/" target="_blank" class="profile-btn">View Profile</a>
             </div>
-            <!-- Guest 4 -->
             <div class="card">
                 <img src="assets/speaker4.jpg" alt="Ismail Muhammad Noman">
                 <h3>Ismail Muhammad Noman</h3>
                 <div class="title">Chartered Engineer</div>
-                <div class="details">Digital Platform, Banglalink<br>Ex-Astha IT | Ex-Bongo</div>
+                <div class="details">Banglalink<br>Ex-Astha IT | Ex-Bongo</div>
+                <a href="https://www.linkedin.com/in/noman13bd/" target="_blank" class="profile-btn">View Profile</a>
             </div>
-            <!-- Guest 5 -->
             <div class="card">
                 <img src="assets/speaker5.jpg" alt="Md. Mosiuzzaman">
                 <h3>Md. Mosiuzzaman</h3>
                 <div class="title">Chief Business Officer</div>
-                <div class="details">Ahsan Technologies Limited<br>Ex-AGM, SSL Wireless | AVP, CNS</div>
+                <div class="details">Ahsan Technologies Ltd</div>
+                <a href="https://www.linkedin.com/in/md-mosiuzzaman/" target="_blank" class="profile-btn">View Profile</a>
             </div>
-            <!-- Guest 6 -->
             <div class="card">
                 <img src="assets/speaker6.jpg" alt="Jayed Ahsan Saad">
                 <h3>Jayed Ahsan Saad</h3>
                 <div class="title">Founder, Codepotro</div>
-                <div class="details">Creator of Borno Keyboard, Hadi and Abu Sayed Font</div>
+                <div class="details">Creator of Borno Keyboard</div>
+                <a href="https://www.linkedin.com/in/jayedahsan/" target="_blank" class="profile-btn">View Profile</a>
             </div>
         </div>
     </div>
 
     <!-- Leadership & Organizers Section -->
-    <div class="section" style="background: #fff; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); padding: 60px 40px; margin-top: 40px;">
+    <div class="section" style="background: #fff; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); padding: 60px 40px;">
         <div class="section-header">
             <h2>Leadership & Organizers</h2>
             <p>The team behind the AI Summit 2026</p>
         </div>
         
-        <!-- Top Row: Patrons & Faculty -->
-        <div class="grid" style="margin-bottom: 30px;">
-            <!-- Convener -->
+        <!-- Faculty Grid (Convener + 5 Members = 6 Cards total, perfect 3x2) -->
+        <div class="grid-3">
+            <!-- Convener (First in the grid) -->
             <div class="card" style="border-top: 4px solid var(--gold);">
                 <img src="assets/convener.jpg" alt="Prof. Dr. Md. Mijanur Rahman">
                 <h3>Prof. Dr. Md. Mijanur Rahman</h3>
-                <div class="title">Convener & Head of CSE</div>
-                <div class="details">Dean, School of Engineering, Science & Technology<br>Manarat International University</div>
+                <div class="title">Convener</div>
+                <div class="details">Dean, School of Engineering<br>Head of CSE, MIU</div>
+                <a href="https://www.linkedin.com/in/md-mijanur-rahman-4298742a8/" target="_blank" class="profile-btn">View Profile</a>
             </div>
-            <!-- Faculty Coordinator -->
+            
             <div class="card" style="border-top: 4px solid var(--gold);">
                 <img src="assets/faculty1.jpg" alt="Tanvir Ahmed">
                 <h3>Tanvir Ahmed</h3>
                 <div class="title">Moderator, MIU CSE Club</div>
                 <div class="details">Assistant Professor<br>Department of CSE, MIU</div>
+                <a href="https://cse.manarat.ac.bd/faculty/tanvir-ahmed" target="_blank" class="profile-btn">View Profile</a>
             </div>
-            <!-- Faculty Guide -->
             <div class="card" style="border-top: 4px solid var(--gold);">
                 <img src="assets/faculty2.jpg" alt="Shoaib Abdullah">
                 <h3>Shoaib Abdullah</h3>
                 <div class="title">Coordinator, AI Summit 2026</div>
                 <div class="details">Assistant Professor<br>Department of CSE, MIU</div>
+                <a href="https://www.linkedin.com/in/sohaibabdullah/" target="_blank" class="profile-btn">View Profile</a>
             </div>
-        </div>
-
-        <!-- Bottom Row: Program Guide & Club Leaders -->
-        <div class="grid">
-            <!-- Faculty Guide -->
             <div class="card" style="border-top: 4px solid var(--gold);">
                 <img src="assets/ahsanfarabi.jpg" alt="Ahsan Farabi">
                 <h3>Ahsan Farabi</h3>
                 <div class="title">Program Guide</div>
                 <div class="details">Lecturer<br>Department of CSE, MIU</div>
+                <a href="https://www.linkedin.com/in/ahsanfarabi/" target="_blank" class="profile-btn">View Profile</a>
             </div>
+            <div class="card" style="border-top: 4px solid var(--gold);">
+                <img src="assets/faculty4.jpg" alt="Faculty 4">
+                <h3>Faculty Name 4</h3>
+                <div class="title">Faculty Member</div>
+                <div class="details">Department of CSE, MIU</div>
+                <a href="#" target="_blank" class="profile-btn">View Profile</a>
+            </div>
+            <div class="card" style="border-top: 4px solid var(--gold);">
+                <img src="assets/faculty5.jpg" alt="Faculty 5">
+                <h3>Faculty Name 5</h3>
+                <div class="title">Faculty Member</div>
+                <div class="details">Department of CSE, MIU</div>
+                <a href="#" target="_blank" class="profile-btn">View Profile</a>
+            </div>
+        </div>
 
-            <!-- Club President -->
+        <!-- Club Leaders -->
+        <div class="grid" style="max-width: 700px; margin: 40px auto 0 auto;">
             <div class="card">
                 <img src="assets/president.jpg" alt="Mehedy Hasan Rifat">
                 <h3>Mehedy Hasan Rifat</h3>
                 <div class="title">President</div>
                 <div class="details">MIU CSE Club</div>
+                <a href="https://www.linkedin.com/in/mehedyrifat/" target="_blank" class="profile-btn">View Profile</a>
             </div>
-            
-            <!-- Club General Secretary -->
             <div class="card">
                 <img src="assets/gs.png" alt="AFM Jarif">
                 <h3>AFM Jarif</h3>
                 <div class="title">General Secretary</div>
                 <div class="details">MIU CSE Club</div>
+                <a href="https://www.linkedin.com/in/afmjarif/" target="_blank" class="profile-btn">View Profile</a>
             </div>
         </div>
     </div>
-    <!-- Program Details -->
+
+    <!-- Program Schedule -->
     <div class="section">
         <div class="section-header">
             <h2>Program Schedule</h2>
             <p>Mark your calendar</p>
         </div>
-        <div class="grid">
-            <div class="card" style="border-top: 4px solid var(--accent);">
-                <h3>10:00 AM</h3>
-                <div class="title">Registration & Welcome</div>
-                <div class="details">Gather at the MIU Auditorium, collect your passes and ID cards.</div>
-            </div>
-            <div class="card" style="border-top: 4px solid var(--accent);">
-                <h3>11:00 AM</h3>
-                <div class="title">Keynote Sessions</div>
-                <div class="details">Insights from our esteemed guests on AI, Careers, and the future.</div>
-            </div>
-            <div class="card" style="border-top: 4px solid var(--accent);">
-                <h3>01:00 PM</h3>
-                <div class="title">Lunch & Networking</div>
-                <div class="details">Connect with speakers, faculty, and fellow tech enthusiasts.</div>
-            </div>
-            <div class="card" style="border-top: 4px solid var(--accent);">
-                <h3>02:00 PM</h3>
-                <div class="title">Panel Discussion</div>
-                <div class="details">Q&A session with the industry experts.</div>
-            </div>
+        <div class="schedule-container">
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>Activity</th>
+                        <th>By Whom</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Introduction + Documentary</td><td>Sohaib Abdullah</td><td>10.10 AM - 10.20 AM</td></tr>
+                    <tr><td>Speech 1</td><td>Ismail Muhammad Noman</td><td>10.21 AM - 10.35 AM</td></tr>
+                    <tr><td>Speech 2</td><td>Belal Ahmed</td><td>10.36 AM - 10.55 AM</td></tr>
+                    <tr><td>Speech 3 + Q&A</td><td>Munir Hasan</td><td>10.56 AM - 11.35 AM</td></tr>
+                    <tr><td>Speech 4 + Q&A</td><td>Imadur Rahman</td><td>11.36 AM - 12.15 PM</td></tr>
+                    <tr><td>Message</td><td>Vice Chancellor</td><td>12.15 PM - 12.30 PM</td></tr>
+                    <tr><td>Message</td><td>Prof. Dr. Md. Mijanur Rahman</td><td>12.30 PM - 12.45 PM</td></tr>
+                    <tr><td>Interactive Activity + Prize</td><td>Jarif + Farabi</td><td>12.46 PM - 1.30 PM</td></tr>
+                    <tr class="highlight"><td>Lunch + Prayer</td><td>—</td><td>1.40 PM - 2.30 PM</td></tr>
+                    <tr><td>Speech 5 + Practical</td><td>Jayed Ahsan Saad</td><td>2.30 PM - 3.00 PM</td></tr>
+                    <tr><td>Speech 6</td><td>Md. Mosiuzzaman</td><td>3.01 PM - 3.25 PM</td></tr>
+                    <tr><td>Club Speech</td><td>CSE Club_President</td><td>3.26 PM - 3.35 PM</td></tr>
+                    <tr><td>Message</td><td>Md. Ershadul H. Choudhury</td><td>3.36 PM - 3.45 PM</td></tr>
+                    <tr><td>Ending Speech</td><td>Dean & Head of CSE Dept.</td><td>3.46 PM - 4.00 PM</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Volunteer Section -->
+    <div class="section" style="background: white;">
+        <div class="section-header">
+            <h2>Volunteer Team</h2>
+            <p>The backbone of the summit</p>
+        </div>
+        <div class="volunteer-grid">
+            <div class="volunteer-card"><img src="assets/vol1.jpg" alt="Vol 1"><h4>Volunteer 1</h4></div>
+            <div class="volunteer-card"><img src="assets/vol2.jpg" alt="Vol 2"><h4>Volunteer 2</h4></div>
+            <div class="volunteer-card"><img src="assets/vol3.jpg" alt="Vol 3"><h4>Volunteer 3</h4></div>
+            <div class="volunteer-card"><img src="assets/vol4.jpg" alt="Vol 4"><h4>Volunteer 4</h4></div>
+            <div class="volunteer-card"><img src="assets/vol5.jpg" alt="Vol 5"><h4>Volunteer 5</h4></div>
+            <div class="volunteer-card"><img src="assets/vol6.jpg" alt="Vol 6"><h4>Volunteer 6</h4></div>
+            <div class="volunteer-card"><img src="assets/vol7.jpg" alt="Vol 7"><h4>Volunteer 7</h4></div>
+            <div class="volunteer-card"><img src="assets/vol8.jpg" alt="Vol 8"><h4>Volunteer 8</h4></div>
+            <div class="volunteer-card"><img src="assets/vol9.jpg" alt="Vol 9"><h4>Volunteer 9</h4></div>
+            <div class="volunteer-card"><img src="assets/vol10.jpg" alt="Vol 10"><h4>Volunteer 10</h4></div>
+            <div class="volunteer-card"><img src="assets/vol11.jpg" alt="Vol 11"><h4>Volunteer 11</h4></div>
+            <div class="volunteer-card"><img src="assets/vol12.jpg" alt="Vol 12"><h4>Volunteer 12</h4></div>
         </div>
     </div>
 
@@ -262,6 +391,9 @@
         <p>Creating Tech Leaders of Tomorrow</p>
         <p style="margin-top: 15px;">© 2026 MIU CSE Club. All rights reserved.</p>
         <p>Contact: cse_club@manarat.ac.bd</p>
+        <p style="margin-top: 20px; font-size: 0.9rem;">
+            Developed with 💙 by <a href="https://github.com/afmjarif" target="_blank">AFM Jarif</a>
+        </p>
     </footer>
 
     <!-- Apps Script for Live Data -->
