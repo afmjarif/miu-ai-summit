@@ -106,14 +106,14 @@
         .schedule-table .highlight { background: #f0f8ff; font-weight: 700; }
         .schedule-table td:last-child { font-weight: 600; color: var(--accent); white-space: nowrap;}
 
-        /* ✅ Updated Volunteer Grid (Perfect Circles) */
+        /* Volunteer Grid */
         .volunteer-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 20px; }
         .volunteer-card { 
             text-align: center; background: white; padding: 20px 10px; 
             border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); 
         }
         .volunteer-card img { 
-            width: 80px; height: 80px; border-radius: 50%; /* Forces perfect circle */
+            width: 80px; height: 80px; border-radius: 50%;
             object-fit: cover; margin-bottom: 12px; border: 2px solid var(--accent); 
         }
         .volunteer-card h4 { 
@@ -261,9 +261,7 @@
             <p>The team behind the AI Summit 2026</p>
         </div>
         
-        <!-- Faculty Grid (Convener + 5 Members = 6 Cards total, perfect 3x2) -->
         <div class="grid-3">
-            <!-- Convener (First in the grid) -->
             <div class="card" style="border-top: 4px solid var(--gold);">
                 <img src="assets/convener.jpg" alt="Prof. Dr. Md. Mijanur Rahman">
                 <h3>Prof. Dr. Md. Mijanur Rahman</h3>
@@ -309,7 +307,6 @@
             </div>
         </div>
 
-        <!-- Club Leaders -->
         <div class="grid" style="max-width: 700px; margin: 40px auto 0 auto;">
             <div class="card">
                 <img src="assets/president.jpg" alt="Mehedy Hasan Rifat">
@@ -344,83 +341,55 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Introduction + Documentary</td>
-                        <td>Sohaib Abdullah (Asst. Professor, CSE)</td>
-                        <td>10:10 AM - 10:25 AM</td>
-                    </tr>
-                    <tr>
-                        <td>Speech 1</td>
-                        <td>Dr. Md Mahedi Hasan (Postdoctoral Associate, Rockefeller University)</td>
-                        <td>10:25 AM - 10:45 AM</td>
-                    </tr>
-                    <tr>
-                        <td>Speech 2</td>
-                        <td>Belal Ahmed (CEO, BITSCo)</td>
-                        <td>10:45 AM - 11:04 AM</td>
-                    </tr>
-                    <tr>
-                        <td>Speech 3 + Q&A</td>
-                        <td>Munir Hasan (Digital Transformation Consultant, Daily Prothom Alo)</td>
-                        <td>11:04 AM - 11:43 AM</td>
-                    </tr>
-                    <tr>
-                        <td>Speech 4 + Q&A</td>
-                        <td>Dr. Muhammad Imadur Rahman (MD & CEO, BSCL)</td>
-                        <td>11:43 AM - 12:22 PM</td>
-                    </tr>
-                    <tr>
-                        <td>Message</td>
-                        <td>Dr. Muhammad Abdur Rob (Vice-Chancellor)</td>
-                        <td>12:22 PM - 12:37 PM</td>
-                    </tr>
-                    <tr>
-                        <td>Message</td>
-                        <td>Prof. Dr. Md. Mijanur Rahman (Head, CSE & Dean, SEST)</td>
-                        <td>12:37 PM - 12:52 PM</td>
-                    </tr>
-                    <tr>
-                        <td>Interactive Activity + Prize</td>
-                        <td>AFM Jarif (General Secretary, MIU CSE Club) & Ahsan Farabi (Lecturer, CSE)</td>
-                        <td>12:52 PM - 01:36 PM</td>
-                    </tr>
-                    <tr class="highlight">
-                        <td>Lunch + Prayer</td>
-                        <td>—</td>
-                        <td>01:40 PM - 02:30 PM</td>
-                    </tr>
-                    <tr>
-                        <td>Speech 5 + Practical</td>
-                        <td>Jayed Ahsan Saad (Founder, Codepotro)</td>
-                        <td>02:30 PM - 03:00 PM</td>
-                    </tr>
-                    <tr>
-                        <td>Speech 6</td>
-                        <td>Md. Mosiuzzaman (CBO, Ahsan Tech)</td>
-                        <td>03:01 PM - 03:25 PM</td>
-                    </tr>
-                    <tr>
-                        <td>Club Speech</td>
-                        <td>Mehedy Hasan Rifat (President, MIU CSE Club)</td>
-                        <td>03:26 PM - 03:35 PM</td>
-                    </tr>
-                    <tr>
-                        <td>Message</td>
-                        <td>Md. Ershadul Haque Chowdhury (Head, Department of EEE)</td>
-                        <td>03:36 PM - 03:45 PM</td>
-                    </tr>
-                    <tr>
-                        <td>Ending Speech</td>
-                        <td>Dean & Head of CSE Dept.</td>
-                        <td>03:46 PM - 04:00 PM</td>
-                    </tr>
+                    <tr><td>Introduction + Documentary</td><td>Sohaib Abdullah (Asst. Professor, CSE)</td><td>10:10 AM - 10:25 AM</td></tr>
+                    <tr><td>Speech 1</td><td>Dr. Md Mahedi Hasan (Postdoctoral Associate, Rockefeller University)</td><td>10:25 AM - 10:45 AM</td></tr>
+                    <tr><td>Speech 2</td><td>Belal Ahmed (CEO, BITSCo)</td><td>10:45 AM - 11:04 AM</td></tr>
+                    <tr><td>Speech 3 + Q&A</td><td>Munir Hasan (Digital Transformation Consultant, Daily Prothom Alo)</td><td>11:04 AM - 11:43 AM</td></tr>
+                    <tr><td>Speech 4 + Q&A</td><td>Dr. Muhammad Imadur Rahman (MD & CEO, BSCL)</td><td>11:43 AM - 12:22 PM</td></tr>
+                    <tr><td>Message</td><td>Dr. Muhammad Abdur Rob (Vice-Chancellor)</td><td>12:22 PM - 12:37 PM</td></tr>
+                    <tr><td>Message</td><td>Prof. Dr. Md. Mijanur Rahman (Head, CSE & Dean, SEST)</td><td>12:37 PM - 12:52 PM</td></tr>
+                    <tr><td>Interactive Activity + Prize</td><td>AFM Jarif (General Secretary, MIU CSE Club) & Ahsan Farabi (Lecturer, CSE)</td><td>12:52 PM - 01:36 PM</td></tr>
+                    <tr class="highlight"><td>Lunch + Prayer</td><td>—</td><td>01:40 PM - 02:30 PM</td></tr>
+                    <tr><td>Speech 5 + Practical</td><td>Jayed Ahsan Saad (Founder, Codepotro)</td><td>02:30 PM - 03:00 PM</td></tr>
+                    <tr><td>Speech 6</td><td>Md. Mosiuzzaman (CBO, Ahsan Tech)</td><td>03:01 PM - 03:25 PM</td></tr>
+                    <tr><td>Club Speech</td><td>Mehedy Hasan Rifat (President, MIU CSE Club)</td><td>03:26 PM - 03:35 PM</td></tr>
+                    <tr><td>Message</td><td>Md. Ershadul Haque Chowdhury (Head, Department of EEE)</td><td>03:36 PM - 03:45 PM</td></tr>
+                    <tr><td>Ending Speech</td><td>Dean & Head of CSE Dept.</td><td>03:46 PM - 04:00 PM</td></tr>
                 </tbody>
             </table>
         </div>
     </div>
 
+    <!-- ✅ Tech Team Section (3 Members) -->
+    <div class="section" style="background: white; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); padding: 60px 40px;">
+        <div class="section-header">
+            <h2>Tech Team</h2>
+            <p>Technical Support & Photography</p>
+        </div>
+        <div class="grid-3">
+            <div class="card" style="border-top: 4px solid var(--accent);">
+                <img src="assets/tech1.jpg" alt="Tech Team Member">
+                <h3>Tech Team Member 1</h3>
+                <div class="title">Tech Lead</div>
+                <div class="details">Technical Support & Setup</div>
+            </div>
+            <div class="card" style="border-top: 4px solid var(--accent);">
+                <img src="assets/tech2.jpg" alt="Tech Team Member">
+                <h3>Tech Team Member 2</h3>
+                <div class="title">Main Photographer</div>
+                <div class="details">Photo Shoots & Coverage</div>
+            </div>
+            <div class="card" style="border-top: 4px solid var(--accent);">
+                <img src="assets/tech3.jpg" alt="Tech Team Member">
+                <h3>Tech Team Member 3</h3>
+                <div class="title">Technical Support</div>
+                <div class="details">Audio, Visuals & Systems</div>
+            </div>
+        </div>
+    </div>
+
     <!-- Volunteer Section -->
-    <div class="section" style="background: white;">
+    <div class="section">
         <div class="section-header">
             <h2>Volunteer Team</h2>
             <p>The backbone of the summit</p>
