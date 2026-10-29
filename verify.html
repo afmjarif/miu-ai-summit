@@ -44,22 +44,67 @@
             100% { transform: scale(1); opacity: 1; }
         }
 
-        /* ✅ Loading Dots Animation */
-        @keyframes bounce {
-            0%, 80%, 100% { transform: scale(0); }
-            40% { transform: scale(1.0); }
+        /* ✅ NEW: Logo Spinner Animation */
+        .logo-loader {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .loading-dots { display: flex; justify-content: center; align-items: center; height: 50px; gap: 10px; margin-bottom: 20px; }
-        .loading-dots div {
-            width: 20px; height: 20px;
-            background-color: #00C2FF;
+        .logo-loader img {
+            width: 50px;
+            height: 50px;
+            position: relative;
+            z-index: 2;
             border-radius: 50%;
-            animation: bounce 1.4s infinite ease-in-out both;
+            background: #ffffff;
+            padding: 5px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-        .loading-dots div:nth-child(1) { animation-delay: -0.32s; }
-        .loading-dots div:nth-child(2) { animation-delay: -0.16s; }
-        .loading-dots div:nth-child(3) { animation-delay: 0s; }
+
+        /* The spinning ring */
+        .logo-loader::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #00C2FF;
+            border-right-color: #00C2FF;
+            animation: spin 1.5s linear infinite;
+            z-index: 1;
+        }
+
+        /* The orbiting dots */
+        .orbiting-dots {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: spin 3s linear infinite reverse;
+            z-index: 1;
+        }
+
+        .orbiting-dots::before, .orbiting-dots::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #00C2FF;
+            border-radius: 50%;
+        }
+
+        .orbiting-dots::before { top: 5px; left: 50%; transform: translateX(-50%); }
+        .orbiting-dots::after { bottom: 5px; left: 50%; transform: translateX(-50%); }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
         .verify-card { 
             background: white; 
@@ -137,12 +182,13 @@
 
     <div class="main-content">
         <div class="verify-card" id="card">
-            <!-- ✅ Loading Dots Animation -->
-            <div class="loading-dots">
-                <div></div>
-                <div></div>
-                <div></div>
+            
+            <!-- ✅ NEW: Logo with Spinning Dots -->
+            <div class="logo-loader">
+                <img src="assets/logo.png" alt="Loading...">
+                <div class="orbiting-dots"></div>
             </div>
+            
             <p style="color:#666; font-weight:600;">Verifying Certificate...</p>
         </div>
     </div>
