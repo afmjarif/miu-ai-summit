@@ -19,16 +19,6 @@
             min-height: 100vh;
             transition: background-color 0.4s ease;
             overflow-x: hidden;
-            position: relative;
-        }
-
-        /* ✅ Falling Dots Canvas Background */
-        #dots-canvas {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            z-index: 0;
-            pointer-events: none; /* Allows clicking through the dots */
         }
 
         .main-content {
@@ -76,7 +66,7 @@
             max-width: 700px; 
             width: 100%; 
             border-radius: 24px; 
-            box-shadow: 0 15px 40px rgba(10,37,64,0.15); 
+            box-shadow: 0 15px 40px rgba(10,37,64,0.1); 
             overflow: hidden; 
             text-align: center; 
             padding: 50px 40px; 
@@ -126,10 +116,7 @@
 
         .error-msg { font-size: 16px; color: #666; margin-bottom: 20px; }
 
-        footer { 
-            background: #0A2540; color: white; text-align: center; padding: 40px 20px; 
-            margin-top: auto; position: relative; z-index: 10;
-        }
+        footer { background: #0A2540; color: white; text-align: center; padding: 40px 20px; margin-top: auto; }
         footer h3 { color: #FFD700; font-size: 20px; margin-bottom: 10px; font-weight: 900; }
         footer p { opacity: 0.8; margin-bottom: 8px; font-size: 14px; }
         footer a { color: #00C2FF; text-decoration: none; font-weight: 600; transition: 0.2s; }
@@ -148,11 +135,9 @@
 </head>
 <body id="body-bg">
 
-    <!-- ✅ Falling Dots Canvas -->
-    <canvas id="dots-canvas"></canvas>
-
     <div class="main-content">
         <div class="verify-card" id="card">
+            <!-- ✅ Loading Dots Animation -->
             <div class="loading-dots">
                 <div></div>
                 <div></div>
@@ -173,86 +158,25 @@
         <div class="footer-dev">Developed with 💙 by <a href="https://github.com/afmjarif" target="_blank">AFM Jarif</a></div>
     </footer>
 
+    <!-- Audio Elements -->
     <audio id="successSound" src="assets/success.mp3" preload="auto"></audio>
     <audio id="errorSound" src="assets/error.mp3" preload="auto"></audio>
 
     <script>
-        /* ==========================================
-           ✅ 1. Falling Dots Animation
-           ========================================== */
-        const canvas = document.getElementById('dots-canvas');
-        const ctx = canvas.getContext('2d');
-        
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        let dots = [];
-        const dotCount = 60; // Number of dots on screen
-
-        for (let i = 0; i < dotCount; i++) {
-            dots.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                radius: Math.random() * 3 + 1.5, // Size between 1.5 and 4.5
-                speedX: -(Math.random() * 0.5 + 0.2), // Move Left
-                speedY: Math.random() * 1.5 + 0.5,    // Move Down
-                opacity: Math.random() * 0.5 + 0.2    // Fade effect
-            });
-        }
-
-        function drawDots() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            dots.forEach(dot => {
-                // Draw the dot
-                ctx.beginPath();
-                ctx.arc(dot.x, dot.y, dot.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(0, 194, 255, ${dot.opacity})`; // Cyan theme
-                ctx.fill();
-
-                // Move the dot
-                dot.x += dot.speedX;
-                dot.y += dot.speedY;
-
-                // ✅ Reset dot to Top-Right if it goes off screen (Left or Bottom)
-                if (dot.x < -10 || dot.y > canvas.height + 10) {
-                    dot.x = canvas.width + 10; // Start from right
-                    dot.y = -10;               // Start from top
-                }
-            });
-
-            requestAnimationFrame(drawDots);
-        }
-        drawDots();
-
-
-        /* ==========================================
-           ✅ 2. Audio Unlock & Logic
-           ========================================== */
+        // ✅ Unlock audio on first user click anywhere
         let audioUnlocked = false;
-        
-        // Unlock audio on first click
         document.addEventListener('click', function() {
             if (!audioUnlocked) {
                 var s = document.getElementById('successSound');
                 var e = document.getElementById('errorSound');
-                
-                if (s) { s.volume = 0; s.play().then(() => { s.pause(); s.currentTime = 0; s.volume = 0.5; }); }
-                if (e) { e.volume = 0; e.play().then(() => { e.pause(); e.currentTime = 0; e.volume = 0.5; }); }
-                
+                if (s) { s.volume = 0; s.play().then(() => { s.pause(); s.currentTime = 0; s.volume = 0.6; }); }
+                if (e) { e.volume = 0; e.play().then(() => { e.pause(); e.currentTime = 0; e.volume = 0.6; }); }
                 audioUnlocked = true;
             }
         });
 
-
-        /* ==========================================
-           ✅ 3. API Fetch & Rendering
-           ========================================== */
         const API_URL = "https://script.google.com/macros/s/AKfycbzY2-Vrn2tmgsLO8H1g6tOy7tTusEWT6ZyFcsWkf3C3Q2oVz1-RC-h_df0lTst9ph-aWA/exec";
+
         const urlParams = new URLSearchParams(window.location.search);
         const regId = urlParams.get('id');
 
@@ -318,12 +242,14 @@
         function playSound(id) {
             var audio = document.getElementById(id);
             if (audio) {
-                // ✅ Reset time so it can play multiple times
-                audio.currentTime = 0; 
-                audio.volume = 0.5;
-                audio.play().catch(function(error) {
-                    console.log("Audio blocked. Click screen to enable.");
-                });
+                audio.currentTime = 0;
+                audio.volume = 0.6;
+                var playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(function(error) {
+                        // Auto-play was blocked by browser
+                    });
+                }
             }
         }
 
