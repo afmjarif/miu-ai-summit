@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Certificate Verification - AI Summit 2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
-    <!-- ✅ Load Confetti Library -->
+    <!-- ✅ Confetti Library -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     
     <style>
@@ -18,7 +18,7 @@
             flex-direction: column; 
             min-height: 100vh;
             transition: background-color 0.4s ease;
-            overflow-x: hidden; /* Prevents scrollbar during confetti */
+            overflow-x: hidden;
         }
 
         .main-content {
@@ -43,6 +43,23 @@
             0% { transform: scale(0.8); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
         }
+
+        /* ✅ Loading Dots Animation */
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1.0); }
+        }
+
+        .loading-dots { display: flex; justify-content: center; align-items: center; height: 40px; gap: 8px; margin-bottom: 20px; }
+        .loading-dots div {
+            width: 15px; height: 15px;
+            background-color: #00C2FF;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+        .loading-dots div:nth-child(1) { animation-delay: -0.32s; }
+        .loading-dots div:nth-child(2) { animation-delay: -0.16s; }
+        .loading-dots div:nth-child(3) { animation-delay: 0s; }
 
         .verify-card { 
             background: white; 
@@ -97,9 +114,6 @@
         }
         .btn:hover { background: #00C2FF; color: #0A2540; transform: translateY(-2px); }
 
-        #loader { border: 5px solid #f3f3f3; border-top: 5px solid #00C2FF; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 30px auto; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
         .error-msg { font-size: 16px; color: #666; margin-bottom: 20px; }
 
         footer { background: #0A2540; color: white; text-align: center; padding: 40px 20px; margin-top: auto; }
@@ -123,7 +137,12 @@
 
     <div class="main-content">
         <div class="verify-card" id="card">
-            <div id="loader"></div>
+            <!-- ✅ New Dots Loading Animation -->
+            <div class="loading-dots">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
             <p style="color:#666; font-weight:600;">Verifying Certificate...</p>
         </div>
     </div>
@@ -142,6 +161,10 @@
             Developed with 💙 by <a href="https://github.com/afmjarif" target="_blank">AFM Jarif</a>
         </div>
     </footer>
+
+    <!-- ✅ Audio Files -->
+    <audio id="successSound" src="assets/success.mp3" preload="auto"></audio>
+    <audio id="errorSound" src="assets/error.mp3" preload="auto"></audio>
 
     <script>
         const API_URL = "https://script.google.com/macros/s/AKfycbzY2-Vrn2tmgsLO8H1g6tOy7tTusEWT6ZyFcsWkf3C3Q2oVz1-RC-h_df0lTst9ph-aWA/exec";
@@ -189,59 +212,8 @@
                 <a href="${data.certificateLink}" target="_blank" class="btn">📥 Download Certificate</a>
             `;
 
-            // ✅ Trigger Confetti Blast
+            playSound('successSound');
             fireConfetti();
-        }
-
-        function fireConfetti() {
-            // Center blast
-            confetti({
-                particleCount: 150,
-                spread: 100,
-                origin: { y: 0.6 },
-                colors: ['#0A2540', '#00C2FF', '#FFD700', '#10B981', '#EF4444']
-            });
-
-            // Left side blast
-            setTimeout(() => {
-                confetti({
-                    particleCount: 80,
-                    angle: 60,
-                    spread: 70,
-                    origin: { x: 0, y: 0.7 },
-                    colors: ['#0A2540', '#00C2FF', '#FFD700']
-                });
-            }, 250);
-
-            // Right side blast
-            setTimeout(() => {
-                confetti({
-                    particleCount: 80,
-                    angle: 120,
-                    spread: 70,
-                    origin: { x: 1, y: 0.7 },
-                    colors: ['#10B981', '#EF4444', '#FFD700']
-                });
-            }, 400);
-
-            // Falling ribbons (continuous for 3 seconds)
-            var end = Date.now() + (3 * 1000);
-            (function frame() {
-                confetti({
-                    particleCount: 2,
-                    angle: 90,
-                    spread: 45,
-                    origin: { x: Math.random(), y: -0.1 },
-                    colors: ['#0A2540', '#00C2FF', '#FFD700', '#10B981', '#EF4444'],
-                    gravity: 0.8,
-                    scalar: 1.2,
-                    drift: (Math.random() - 0.5) * 1
-                });
-
-                if (Date.now() < end) {
-                    requestAnimationFrame(frame);
-                }
-            }());
         }
 
         function showInvalid(msg) {
@@ -257,6 +229,30 @@
                 <p class="error-msg">${msg}</p>
                 <p style="color:#666; font-size:14px;">If you believe this is a mistake, please contact the MIU CSE Club.</p>
             `;
+
+            playSound('errorSound');
+        }
+
+        function playSound(id) {
+            var audio = document.getElementById(id);
+            if (audio) {
+                audio.volume = 0.5; 
+                audio.play().catch(function(error) {
+                    console.log("Audio blocked by browser:", error);
+                });
+            }
+        }
+
+        function fireConfetti() {
+            confetti({ particleCount: 150, spread: 100, origin: { y: 0.6 }, colors: ['#0A2540', '#00C2FF', '#FFD700', '#10B981', '#EF4444'] });
+            setTimeout(() => { confetti({ particleCount: 80, angle: 60, spread: 70, origin: { x: 0, y: 0.7 }, colors: ['#0A2540', '#00C2FF', '#FFD700'] }); }, 250);
+            setTimeout(() => { confetti({ particleCount: 80, angle: 120, spread: 70, origin: { x: 1, y: 0.7 }, colors: ['#10B981', '#EF4444', '#FFD700'] }); }, 400);
+            
+            var end = Date.now() + (3 * 1000);
+            (function frame() {
+                confetti({ particleCount: 2, angle: 90, spread: 45, origin: { x: Math.random(), y: -0.1 }, colors: ['#0A2540', '#00C2FF', '#FFD700', '#10B981', '#EF4444'], gravity: 0.8, scalar: 1.2, drift: (Math.random() - 0.5) * 1 });
+                if (Date.now() < end) { requestAnimationFrame(frame); }
+            }());
         }
     </script>
 </body>
