@@ -137,7 +137,7 @@
 
     <div class="main-content">
         <div class="verify-card" id="card">
-            <!-- ✅ New Dots Loading Animation -->
+            <!-- ✅ Loading Dots Animation -->
             <div class="loading-dots">
                 <div></div>
                 <div></div>
@@ -168,6 +168,14 @@
 
     <script>
         const API_URL = "https://script.google.com/macros/s/AKfycbzY2-Vrn2tmgsLO8H1g6tOy7tTusEWT6ZyFcsWkf3C3Q2oVz1-RC-h_df0lTst9ph-aWA/exec";
+
+        // ✅ Add a one-time click listener to unlock audio for browser security
+        document.body.addEventListener('click', function() {
+            document.getElementById('successSound').play().catch(()=>{});
+            document.getElementById('successSound').pause();
+            document.getElementById('errorSound').play().catch(()=>{});
+            document.getElementById('errorSound').pause();
+        }, { once: true });
 
         const urlParams = new URLSearchParams(window.location.search);
         const regId = urlParams.get('id');
@@ -237,8 +245,9 @@
             var audio = document.getElementById(id);
             if (audio) {
                 audio.volume = 0.5; 
+                // The promise catch prevents the console from showing the autoplay error
                 audio.play().catch(function(error) {
-                    console.log("Audio blocked by browser:", error);
+                    console.log("Audio blocked. Click the screen to enable sound.");
                 });
             }
         }
