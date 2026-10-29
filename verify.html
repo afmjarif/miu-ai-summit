@@ -51,7 +51,6 @@
             z-index: 10;
         }
 
-        /* ✅ Animation Classes */
         .animate-pop { animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
         .animate-shake { animation: shake 0.6s cubic-bezier(.36,.07,.19,.97) both; }
 
@@ -97,7 +96,6 @@
 
         .error-msg { font-size: 16px; color: #666; margin-bottom: 20px; }
 
-        /* ✅ Footer Styles */
         footer { background: #0A2540; color: white; text-align: center; padding: 40px 20px; margin-top: auto; }
         footer h3 { color: #FFD700; font-size: 20px; margin-bottom: 10px; font-weight: 900; }
         footer p { opacity: 0.8; margin-bottom: 8px; font-size: 14px; }
@@ -124,7 +122,6 @@
         </div>
     </div>
 
-    <!-- ✅ Footer Section -->
     <footer>
         <h3>MIU CSE CLUB</h3>
         <p>Creating Tech Leaders of Tomorrow</p>
@@ -140,7 +137,6 @@
         </div>
     </footer>
 
-    <!-- Apps Script Logic -->
     <script>
         const API_URL = "https://script.google.com/macros/s/AKfycbzY2-Vrn2tmgsLO8H1g6tOy7tTusEWT6ZyFcsWkf3C3Q2oVz1-RC-h_df0lTst9ph-aWA/exec";
 
@@ -150,7 +146,7 @@
         if (!regId) {
             showInvalid("No Certificate ID Found in URL.");
         } else {
-            // Add a random cache buster to force browser to fetch new data
+            // Cache buster added to force fresh fetch
             const script = document.createElement('script');
             script.src = API_URL + "?action=verifyCertificate&id=" + encodeURIComponent(regId) + "&callback=renderResult&_=" + new Date().getTime();
             script.onerror = function() {
@@ -160,19 +156,17 @@
         }
 
         function renderResult(data) {
-            // Check if the data exists and matches
-            if (data && data.success === true) {
+            // ✅ STRICT CHECK: Does the returned RegID match the URL exactly?
+            if (data && data.success === true && data.regId === regId) {
                 showValid(data);
             } else {
-                var errorMsg = (data && data.message) ? data.message : "This certificate could not be verified.";
-                showInvalid(errorMsg);
+                // If IDs don't match, or success is false
+                showInvalid("Certificate not found or ID mismatch.");
             }
         }
 
         function showValid(data) {
             const card = document.getElementById('card');
-            
-            // Apply Pop-in Animation
             card.classList.add('animate-pop');
             
             card.innerHTML = `
@@ -197,10 +191,7 @@
             const card = document.getElementById('card');
             const body = document.getElementById('body-bg');
 
-            // Force the page to turn red
             body.style.backgroundColor = "#FEE2E2"; 
-            
-            // Apply Shake Animation
             card.classList.add('animate-shake'); 
             
             card.innerHTML = `
