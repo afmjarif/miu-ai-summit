@@ -31,20 +31,18 @@
             z-index: 10;
         }
 
-        /* ✅ Shake Animation */
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
             10%, 30%, 50%, 70%, 90% { transform: translateX(-15px); }
             20%, 40%, 60%, 80% { transform: translateX(15px); }
         }
 
-        /* ✅ Pop-in Animation */
         @keyframes popIn {
             0% { transform: scale(0.8); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
         }
 
-        /* ✅ NEW: Logo Spinner Animation */
+        /* ✅ NEW: Logo Spinner Animation with 5 Dots */
         .logo-loader {
             position: relative;
             width: 120px;
@@ -56,8 +54,8 @@
         }
 
         .logo-loader img {
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             position: relative;
             z-index: 2;
             border-radius: 50%;
@@ -80,7 +78,7 @@
             z-index: 1;
         }
 
-        /* The orbiting dots */
+        /* The orbiting container */
         .orbiting-dots {
             position: absolute;
             width: 100%;
@@ -89,17 +87,25 @@
             z-index: 1;
         }
 
-        .orbiting-dots::before, .orbiting-dots::after {
-            content: '';
+        /* ✅ The 5 Orbiting Dots */
+        .orbiting-dots div {
             position: absolute;
             width: 8px;
             height: 8px;
             background: #00C2FF;
             border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            margin-top: -4px;
+            margin-left: -4px;
         }
 
-        .orbiting-dots::before { top: 5px; left: 50%; transform: translateX(-50%); }
-        .orbiting-dots::after { bottom: 5px; left: 50%; transform: translateX(-50%); }
+        /* Spacing them equally (360deg / 5 = 72deg) */
+        .orbiting-dots div:nth-child(1) { transform: rotate(0deg) translate(60px) rotate(0deg); }
+        .orbiting-dots div:nth-child(2) { transform: rotate(72deg) translate(60px) rotate(-72deg); }
+        .orbiting-dots div:nth-child(3) { transform: rotate(144deg) translate(60px) rotate(-144deg); }
+        .orbiting-dots div:nth-child(4) { transform: rotate(216deg) translate(60px) rotate(-216deg); }
+        .orbiting-dots div:nth-child(5) { transform: rotate(288deg) translate(60px) rotate(-288deg); }
 
         @keyframes spin {
             0% { transform: rotate(0deg); }
@@ -183,10 +189,16 @@
     <div class="main-content">
         <div class="verify-card" id="card">
             
-            <!-- ✅ NEW: Logo with Spinning Dots -->
+            <!-- ✅ NEW: Logo with 5 Spinning Dots -->
             <div class="logo-loader">
                 <img src="assets/logo.png" alt="Loading...">
-                <div class="orbiting-dots"></div>
+                <div class="orbiting-dots">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
             </div>
             
             <p style="color:#666; font-weight:600;">Verifying Certificate...</p>
