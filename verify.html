@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Certificate Verification - AI Summit 2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <!-- ✅ Load Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
@@ -15,6 +18,7 @@
             flex-direction: column; 
             min-height: 100vh;
             transition: background-color 0.4s ease;
+            overflow-x: hidden; /* Prevents scrollbar during confetti */
         }
 
         .main-content {
@@ -23,6 +27,8 @@
             justify-content: center;
             align-items: center;
             padding: 40px 20px;
+            position: relative;
+            z-index: 10;
         }
 
         /* ✅ Shake Animation */
@@ -146,7 +152,6 @@
         if (!regId) {
             showInvalid("No Certificate ID Found in URL.");
         } else {
-            // Cache buster added to force fresh fetch
             const script = document.createElement('script');
             script.src = API_URL + "?action=verifyCertificate&id=" + encodeURIComponent(regId) + "&callback=renderResult&_=" + new Date().getTime();
             script.onerror = function() {
@@ -156,12 +161,10 @@
         }
 
         function renderResult(data) {
-            // ✅ STRICT CHECK: Does the returned RegID match the URL exactly?
             if (data && data.success === true && data.regId === regId) {
                 showValid(data);
             } else {
-                // If IDs don't match, or success is false
-                showInvalid("Certificate not found or ID mismatch.");
+                showInvalid(data && data.message ? data.message : "This certificate could not be verified.");
             }
         }
 
@@ -185,6 +188,60 @@
                 
                 <a href="${data.certificateLink}" target="_blank" class="btn">📥 Download Certificate</a>
             `;
+
+            // ✅ Trigger Confetti Blast
+            fireConfetti();
+        }
+
+        function fireConfetti() {
+            // Center blast
+            confetti({
+                particleCount: 150,
+                spread: 100,
+                origin: { y: 0.6 },
+                colors: ['#0A2540', '#00C2FF', '#FFD700', '#10B981', '#EF4444']
+            });
+
+            // Left side blast
+            setTimeout(() => {
+                confetti({
+                    particleCount: 80,
+                    angle: 60,
+                    spread: 70,
+                    origin: { x: 0, y: 0.7 },
+                    colors: ['#0A2540', '#00C2FF', '#FFD700']
+                });
+            }, 250);
+
+            // Right side blast
+            setTimeout(() => {
+                confetti({
+                    particleCount: 80,
+                    angle: 120,
+                    spread: 70,
+                    origin: { x: 1, y: 0.7 },
+                    colors: ['#10B981', '#EF4444', '#FFD700']
+                });
+            }, 400);
+
+            // Falling ribbons (continuous for 3 seconds)
+            var end = Date.now() + (3 * 1000);
+            (function frame() {
+                confetti({
+                    particleCount: 2,
+                    angle: 90,
+                    spread: 45,
+                    origin: { x: Math.random(), y: -0.1 },
+                    colors: ['#0A2540', '#00C2FF', '#FFD700', '#10B981', '#EF4444'],
+                    gravity: 0.8,
+                    scalar: 1.2,
+                    drift: (Math.random() - 0.5) * 1
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
         }
 
         function showInvalid(msg) {
