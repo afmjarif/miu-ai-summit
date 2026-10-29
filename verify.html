@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Verification - AI Summit 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #F5F7FA; margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .verify-card { background: white; max-width: 500px; width: 100%; border-radius: 16px; box-shadow: 0 10px 30px rgba(10,37,64,0.1); overflow: hidden; text-align: center; padding: 40px 30px; }
+        .success-badge { background: #10B981; color: white; padding: 8px 20px; border-radius: 50px; font-weight: bold; font-size: 14px; display: inline-block; margin-bottom: 20px; letter-spacing: 1px; }
+        .error-badge { background: #EF4444; color: white; padding: 8px 20px; border-radius: 50px; font-weight: bold; font-size: 14px; display: inline-block; margin-bottom: 20px; }
+        h1 { color: #0A2540; margin: 0 0 10px; font-size: 24px; }
+        h2 { color: #00C2FF; margin: 0 0 30px; font-size: 18px; font-weight: 600; }
+        .info-row { display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 12px 0; font-size: 15px; }
+        .info-row span:first-child { color: #666; font-weight: 600; }
+        .info-row span:last-child { color: #0A2540; font-weight: 800; }
+        .btn { display: inline-block; margin-top: 30px; background: #0A2540; color: white; padding: 12px 30px; text-decoration: none; border-radius: 8px; font-weight: bold; }
+        .btn:hover { background: #00C2FF; color: #0A2540; }
+        #loader { border: 4px solid #f3f3f3; border-top: 4px solid #00C2FF; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 20px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <div class="verify-card" id="card">
+        <div id="loader"></div>
+        <p style="color:#666;">Verifying Certificate...</p>
+    </div>
+
+    <script>
+        const API_URL = "https://script.google.com/macros/s/AKfycbzY2-Vrn2tmgsLO8H1g6tOy7tTusEWT6ZyFcsWkf3C3Q2oVz1-RC-h_df0lTst9ph-aWA/exec";
+
+        // Get ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const regId = urlParams.get('id');
+
+        if (!regId) {
+            document.getElementById('card').innerHTML = '<div class="error-badge">INVALID</div><h1>No Certificate ID Found</h1>';
+        } else {
+            // Fetch data via JSONP
+            const script = document.createElement('script');
+            script.src = API_URL + "?action=verifyCertificate&id=" + encodeURIComponent(regId) + "&callback=renderResult";
+            document.body.appendChild(script);
+        }
+
+        function renderResult(data) {
+            const card = document.getElementById('card');
+
+            if (data.success) {
+                card.innerHTML = `
+                    <div class="success-badge">✓ VERIFIED</div>
+                    <h1>Certificate Verified</h1>
+                    <h2>MIU CSE Club AI Summit 2026</h2>
+                    
+                    <div class="info-row"><span>Name:</span> <span>${data.name}</span></div>
+                    <div class="info-row"><span>Reg ID:</span> <span>${data.regId}</span></div>
+                    <div class="info-row"><span>Department:</span> <span>${data.department}</span></div>
+                    <div class="info-row"><span>Batch:</span> <span>${data.batch}</span></div>
+                    <div class="info-row"><span>Event Date:</span> <span>${data.date}</span></div>
+                    
+                    <a href="${data.certificateLink}" target="_blank" class="btn">View Certificate PDF</a>
+                `;
+            } else {
+                card.innerHTML = `
+                    <div class="error-badge">NOT FOUND</div>
+                    <h1>Invalid Certificate</h1>
+                    <p style="color:#666; margin-top:10px;">This certificate could not be verified in our database.</p>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
