@@ -3,211 +3,449 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Certificate Verification - AI Summit 2026</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <title>MIU CSE Club AI Summit 2026</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --primary: #0A2540;
+            --accent: #00C2FF;
+            --bg: #F5F7FA;
+            --text: #1A1A1A;
+            --card-bg: #FFFFFF;
+            --gold: #FFD700;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: var(--bg); color: var(--text); line-height: 1.6; }
         
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background: #F5F7FA; 
-            display: flex; 
-            flex-direction: column; 
-            min-height: 100vh;
-            transition: background-color 0.3s ease;
-        }
-
-        .main-content {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 40px 20px;
-        }
-
-        /* ✅ Shake Animation for Invalid */
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
-            20%, 40%, 60%, 80% { transform: translateX(10px); }
-        }
-
-        /* ✅ Pop-in Animation for Verified */
-        @keyframes popIn {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .verify-card { 
-            background: white; 
-            max-width: 700px; 
-            width: 100%; 
-            border-radius: 24px; 
-            box-shadow: 0 15px 40px rgba(10,37,64,0.1); 
-            overflow: hidden; 
-            text-align: center; 
-            padding: 50px 40px; 
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0A2540 0%, #00C2FF 100%);
+            color: white;
+            padding: 100px 20px 80px;
+            text-align: center;
             position: relative;
         }
-
-        /* ✅ Animation Classes */
-        .animate-pop { animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
-        .animate-shake { animation: shake 0.6s cubic-bezier(.36,.07,.19,.97) both; }
-
-        .badge { 
-            padding: 15px 40px; 
-            border-radius: 50px; 
-            font-weight: 900; 
-            font-size: 32px; 
-            display: inline-block; 
-            margin-bottom: 25px; 
-            letter-spacing: 3px; 
+        .hero h1 { font-size: 3.5rem; font-weight: 900; margin-bottom: 10px; letter-spacing: -1px; text-transform: uppercase; }
+        .hero h1 span { color: var(--gold); }
+        .hero p { font-size: 1.2rem; margin-bottom: 30px; opacity: 0.9; max-width: 700px; margin-left: auto; margin-right: auto; }
+        .btn-register {
+            background: var(--gold); color: var(--primary);
+            padding: 16px 45px; border-radius: 50px;
+            text-decoration: none; font-weight: 900; font-size: 1.2rem;
+            display: inline-block; transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2); border: none; cursor: pointer;
         }
-        .success-badge { background: #10B981; color: white; box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3); }
-        .error-badge { background: #EF4444; color: white; box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3); }
+        .btn-register:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(0,0,0,0.3); }
 
-        h1 { color: #0A2540; font-size: 32px; font-weight: 900; margin-bottom: 10px; }
-        h2 { color: #0A2540; font-size: 20px; font-weight: 800; margin-bottom: 5px; }
-        .tagline { color: #666; font-size: 14px; font-style: italic; margin-bottom: 35px; }
-
-        .info-container { background: #F8FAFC; border-radius: 16px; padding: 25px; margin-bottom: 35px; }
-        .info-row { display: flex; justify-content: space-between; border-bottom: 1px solid #E2E8F0; padding: 15px 0; font-size: 18px; }
-        .info-row:last-child { border-bottom: none; }
-        .info-row span:first-child { color: #64748B; font-weight: 600; }
-        .info-row span:last-child { color: #0A2540; font-weight: 800; text-align: right; }
-
-        .btn { 
-            display: inline-block; 
-            background: #0A2540; 
-            color: white; 
-            padding: 18px 40px; 
-            text-decoration: none; 
-            border-radius: 12px; 
-            font-weight: 800; 
-            font-size: 18px;
-            transition: 0.3s;
-            width: 100%;
-            box-shadow: 0 4px 10px rgba(10,37,64,0.2);
+        /* Live Dashboard */
+        .dashboard {
+            display: flex; justify-content: center; gap: 40px;
+            padding: 40px 20px; background: var(--card-bg); 
+            margin-top: -40px; border-radius: 20px; max-width: 900px;
+            margin-left: auto; margin-right: auto;
+            box-shadow: 0 15px 35px rgba(10,37,64,0.1);
+            position: relative; z-index: 10;
         }
-        .btn:hover { background: #00C2FF; color: #0A2540; transform: translateY(-2px); }
+        .stat-box { text-align: center; flex: 1; }
+        .stat-box h2 { color: var(--accent); font-size: 3rem; margin-bottom: 5px; font-weight: 900; }
+        .stat-box p { color: #666; font-weight: 700; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; }
 
-        #loader { border: 5px solid #f3f3f3; border-top: 5px solid #00C2FF; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 30px auto; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        .error-msg { font-size: 16px; color: #666; margin-bottom: 20px; }
-
-        /* ✅ Footer Styles */
-        footer {
-            background: #0A2540;
-            color: white;
-            text-align: center;
-            padding: 40px 20px;
-            margin-top: auto;
+        /* Sections */
+        .section { padding: 70px 20px; max-width: 1200px; margin: auto; }
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-header h2 { font-size: 2.2rem; color: var(--primary); font-weight: 900; margin-bottom: 10px; }
+        .section-header p { color: #666; font-size: 1.1rem; }
+        
+        /* Grid & Cards */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        
+        /* 3-Column Grid */
+        .grid-3 { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 30px; 
+            max-width: 1000px;
+            margin: 0 auto;
         }
-        footer h3 { color: #FFD700; font-size: 20px; margin-bottom: 10px; font-weight: 900; }
-        footer p { opacity: 0.8; margin-bottom: 8px; font-size: 14px; }
-        footer a { color: #00C2FF; text-decoration: none; font-weight: 600; transition: 0.2s; }
-        footer a:hover { text-decoration: underline; color: #FFD700; }
-        .footer-links { margin: 20px 0; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-        .footer-links a { display: inline-flex; align-items: center; gap: 5px; }
-        .footer-dev { margin-top: 25px; font-size: 13px; opacity: 0.7; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+        
+        .card {
+            background: var(--card-bg); padding: 30px 20px; border-radius: 16px;
+            text-align: center; box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+            transition: transform 0.3s; border-top: 4px solid var(--accent);
+            display: flex; flex-direction: column; align-items: center; position: relative;
+        }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        .card img { width: 120px; height: 120px; border-radius: 50%; margin-bottom: 20px; object-fit: cover; background: #eee; border: 3px solid var(--gold); }
+        .card h3 { color: var(--primary); margin-bottom: 5px; font-size: 1.2rem; font-weight: 800; line-height: 1.3;}
+        .card .title { color: var(--accent); font-weight: 700; font-size: 0.85rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .card .details { color: #555; font-size: 0.9rem; line-height: 1.5; margin-bottom: 15px;}
+        
+        /* Profile Link Button */
+        .profile-btn {
+            margin-top: auto; text-decoration: none; font-size: 0.85rem;
+            color: var(--primary); font-weight: 700; border: 1px solid var(--primary);
+            padding: 5px 15px; border-radius: 20px; transition: 0.2s;
+        }
+        .profile-btn:hover { background: var(--primary); color: white; }
 
-        @media (max-width: 600px) {
-            .verify-card { padding: 30px 20px; }
-            .badge { font-size: 24px; padding: 12px 30px; }
-            h1 { font-size: 26px; }
-            .info-row { font-size: 15px; flex-direction: column; text-align: center; gap: 5px; }
-            .info-row span:last-child { text-align: center; }
+        /* Schedule Table */
+        .schedule-container { overflow-x: auto; background: white; border-radius: 16px; box-shadow: 0 8px 25px rgba(0,0,0,0.05); }
+        .schedule-table { width: 100%; border-collapse: collapse; text-align: left; min-width: 600px; }
+        .schedule-table th, .schedule-table td { padding: 15px 20px; border-bottom: 1px solid #eee; }
+        .schedule-table th { background: var(--primary); color: white; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;}
+        .schedule-table tr:hover { background: #f9f9f9; }
+        .schedule-table .highlight { background: #f0f8ff; font-weight: 700; }
+        .schedule-table td:last-child { font-weight: 600; color: var(--accent); white-space: nowrap;}
+
+        /* Volunteer Grid */
+        .volunteer-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 20px; }
+        .volunteer-card { 
+            text-align: center; background: white; padding: 20px 10px; 
+            border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); 
+        }
+        .volunteer-card img { 
+            width: 80px; height: 80px; border-radius: 50%;
+            object-fit: cover; margin-bottom: 12px; border: 2px solid var(--accent); 
+        }
+        .volunteer-card h4 { 
+            font-size: 0.85rem; color: var(--primary); 
+            font-weight: 700; line-height: 1.2; 
+        }
+
+        /* Footer */
+        footer { text-align: center; padding: 50px 20px; background: var(--primary); color: white; margin-top: 50px; }
+        footer h3 { color: var(--gold); font-size: 1.5rem; margin-bottom: 10px; }
+        footer p { opacity: 0.8; margin-bottom: 5px; }
+        footer a { color: var(--accent); text-decoration: none; font-weight: bold; }
+        footer a:hover { text-decoration: underline; }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .grid-3 { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .dashboard { flex-direction: column; gap: 20px; margin: -30px 20px 0; }
+            .stat-box h2 { font-size: 2.5rem; }
+            .section { padding: 50px 20px; }
+            .grid-3 { grid-template-columns: 1fr; }
         }
     </style>
 </head>
-<body id="body-bg">
+<body>
 
-    <!-- Main Verification Area -->
-    <div class="main-content">
-        <div class="verify-card" id="card">
-            <div id="loader"></div>
-            <p style="color:#666; font-weight:600;">Verifying Certificate...</p>
+    <!-- Hero -->
+    <div class="hero">
+        <img src="assets/banner.jpg" alt="AI Summit 2026 Banner" style="max-width: 900px; width: 100%; border-radius: 20px; margin-bottom: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.3); border: 3px solid rgba(255,255,255,0.1);">
+        <h1>AI SUMMIT <span>2026</span></h1>
+        <p>The Future of Jobs and Education in the Age of AI</p>
+        <p style="font-size: 1rem; margin-bottom: 30px;">📍 MIU Auditorium | 📅 31 October 2026</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeToPyP0lK1nPkDnOj0HXQEVV2jB5NxjSzwXZ3s8QoPIriUfw/viewform?usp=header" target="_blank" class="btn-register">Register Now 🚀</a>
+    </div>
+
+    <!-- Live Dashboard -->
+    <div class="dashboard">
+        <div class="stat-box">
+            <h2 id="total-reg">0</h2>
+            <p>Registered</p>
+        </div>
+        <div class="stat-box">
+            <h2 id="verified-reg">0</h2>
+            <p>Verified</p>
+        </div>
+        <div class="stat-box">
+            <h2 id="checked-in">0</h2>
+            <p>Checked In</p>
         </div>
     </div>
 
-    <!-- Footer Section -->
+    <!-- Top Leadership: Chief Guest, Chair, Special Guest -->
+    <div class="section" style="padding-bottom: 0;">
+        <div class="section-header">
+            <h2>Honorable Guests</h2>
+            <p>Leading the vision of AI Summit 2026</p>
+        </div>
+        <div class="grid-3">
+            <div class="card" style="border-top: 4px solid var(--gold);">
+                <img src="assets/chiefg.jpg" alt="Prof. Dr. Mohammad Abdur Rob">
+                <h3>Prof. Dr. Mohammad Abdur Rob</h3>
+                <div class="title">Chief Guest</div>
+                <div class="details">Vice Chancellor (VC)<br>Manarat International University</div>
+                <a href="#" target="_blank" class="profile-btn">View Profile</a>
+            </div>
+            <div class="card" style="border-top: 4px solid var(--gold);">
+                <img src="assets/convener.jpg" alt="Prof. Dr. Md. Mijanur Rahman">
+                <h3>Prof. Dr. Md. Mijanur Rahman</h3>
+                <div class="title">Chair of the Program</div>
+                <div class="details">Dean, School of Engineering<br>Head of CSE, MIU</div>
+                <a href="https://www.linkedin.com/in/md-mijanur-rahman-4298742a8/" target="_blank" class="profile-btn">View Profile</a>
+            </div>
+            <div class="card" style="border-top: 4px solid var(--gold);">
+                <img src="assets/specialguest.jpg" alt="Md. Ershadul H. Choudhury">
+                <h3>Md. Ershadul Haque Choudhury</h3>
+                <div class="title">Special Guest</div>
+                <div class="details">Professor & Head of EEE<br>Manarat International University</div>
+                <a href="https://eee.manarat.ac.bd/faculty/md-ershadul-h-choudhury" target="_blank" class="profile-btn">View Profile</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Guests & Speakers Section -->
+    <div class="section">
+        <div class="section-header">
+            <h2>Guests & Speakers</h2>
+            <p>Industry leaders, innovators, and AI pioneers</p>
+        </div>
+        <div class="grid">
+            <div class="card">
+                <img src="assets/speaker1.jpg" alt="Dr. Muhammad Imadur Rahman">
+                <h3>Dr. Muhammad Imadur Rahman</h3>
+                <div class="title">Managing Director & CEO</div>
+                <div class="details">BSCL<br>Researcher at Ericsson</div>
+                <a href="https://www.linkedin.com/in/imadur/" target="_blank" class="profile-btn">View Profile</a>
+            </div>
+            <div class="card">
+                <img src="assets/speaker2.jpg" alt="Munir Hasan">
+                <h3>Munir Hasan</h3>
+                <div class="title">AI Advocate</div>
+                <div class="details">Consultant, Prothom Alo<br>President, BDOSN</div>
+                <a href="https://www.linkedin.com/in/munir-hasan-97475a3a/" target="_blank" class="profile-btn">View Profile</a>
+            </div>
+            <div class="card">
+                <img src="assets/speaker3.jpg" alt="Belal Ahmed">
+                <h3>Belal Ahmed</h3>
+                <div class="title">CEO, BITSCOL & AppValey</div>
+                <div class="details">Former Director, BASIS</div>
+                <a href="https://www.facebook.com/belal.ahmed/" target="_blank" class="profile-btn">View Profile</a>
+            </div>
+            <div class="card">
+                <img src="assets/speaker4.jpg" alt="Md Mahedi Hasan">
+                <h3>Md Mahedi Hasan</h3>
+                <div class="title">PhD Researcher in CV and Multimodal AI</div>
+                <div class="details">Doctoral Researcher specializing in Machine Learning<br>Computer Vision</div>
+                <a href="https://mahedi-61.github.io/" target="_blank" class="profile-btn">View Profile</a>
+            </div>
+            <div class="card">
+                <img src="assets/speaker5.jpg" alt="Md. Mosiuzzaman">
+                <h3>Md. Mosiuzzaman</h3>
+                <div class="title">Chief Business Officer</div>
+                <div class="details">Ahsan Technologies Ltd</div>
+                <a href="https://www.linkedin.com/in/md-mosiuzzaman/" target="_blank" class="profile-btn">View Profile</a>
+            </div>
+            <div class="card">
+                <img src="assets/speaker6.jpg" alt="Jayed Ahsan Saad">
+                <h3>Jayed Ahsan Saad</h3>
+                <div class="title">Founder, Codepotro</div>
+                <div class="details">Creator of Borno Keyboard</div>
+                <a href="https://www.linkedin.com/in/jayedahsan/" target="_blank" class="profile-btn">View Profile</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leadership & Organizers Section -->
+    <div class="section" style="background: #fff; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); padding: 60px 40px;">
+        <div class="section-header">
+            <h2>Leadership & Organizers</h2>
+            <p>The team behind the AI Summit 2026</p>
+        </div>
+        
+        <div class="grid-3">
+            <div class="card" style="border-top: 4px solid var(--gold);">
+                <img src="assets/convener.jpg" alt="Prof. Dr. Md. Mijanur Rahman">
+                <h3>Prof. Dr. Md. Mijanur Rahman</h3>
+                <div class="title">Convener</div>
+                <div class="details">Dean, School of Engineering<br>Head of CSE, MIU</div>
+                <a href="https://www.linkedin.com/in/md-mijanur-rahman-4298742a8/" target="_blank" class="profile-btn">View Profile</a>
+            </div>
+            <div class="card" style="border-top: 4px solid var(--gold);">
+                <img src="assets/faculty1.jpg" alt="Tanvir Ahmed">
+                <h3>Tanvir Ahmed</h3>
+                <div class="title">Moderator, MIU CSE Club</div>
+                <div class="details">Assistant Professor<br>Department of CSE, MIU</div>
+                <a href="https://cse.manarat.ac.bd/faculty/tanvir-ahmed" target="_blank" class="profile-btn">View Profile</a>
+            </div>
+            <div class="card" style="border-top: 4px solid var(--gold);">
+                <img src="assets/faculty2.jpg" alt="Shoaib Abdullah">
+                <h3>Shoaib Abdullah</h3>
+                <div class="title">Coordinator, AI Summit 2026</div>
+                <div class="details">Assistant Professor<br>Department of CSE, MIU</div>
+                <a href="https://www.linkedin.com/in/sohaibabdullah/" target="_blank" class="profile-btn">View Profile</a>
+            </div>
+            <div class="card" style="border-top: 4px solid var(--gold);">
+                <img src="assets/faculty3.jpg" alt="Mohammad Rafiqul Islam">
+                <h3>Mohammad Rafiqul Islam</h3>
+                <div class="title">Food & Transport Management</div>
+                <div class="details">Associate Professor<br>Department of CSE, MIU</div>
+                <a href="https://cse.manarat.ac.bd/faculty/mohammad-rafiqul-islam" target="_blank" class="profile-btn">View Profile</a>
+            </div>
+            <div class="card" style="border-top: 4px solid var(--gold);">
+                <img src="assets/faculty4.jpg" alt="Md Zahurul Haque">
+                <h3>Md Zahurul Haque</h3>
+                <div class="title">Event Operations & Management </div>
+                <div class="details">Assistant Professor<br>Department of CSE, MIU</div>
+                <a href="https://cse.manarat.ac.bd/faculty/md-zahurul-haque" target="_blank" class="profile-btn">View Profile</a>
+            </div>
+            <div class="card" style="border-top: 4px solid var(--gold);">
+                <img src="assets/ahsanfarabi.jpg" alt="Ahsan Farabi">
+                <h3>Ahsan Farabi</h3>
+                <div class="title">Program Guide</div>
+                <div class="details">Lecturer<br>Department of CSE, MIU</div>
+                <a href="https://www.linkedin.com/in/ahsanfarabi/" target="_blank" class="profile-btn">View Profile</a>
+            </div>
+        </div>
+
+        <div class="grid" style="max-width: 700px; margin: 40px auto 0 auto;">
+            <div class="card">
+                <img src="assets/president.jpg" alt="Mehedy Hasan Rifat">
+                <h3>Mehedy Hasan Rifat</h3>
+                <div class="title">President</div>
+                <div class="details">MIU CSE Club</div>
+                <a href="https://www.linkedin.com/in/mehedyrifat/" target="_blank" class="profile-btn">View Profile</a>
+            </div>
+            <div class="card">
+                <img src="assets/gs.png" alt="AFM Jarif">
+                <h3>AFM Jarif</h3>
+                <div class="title">General Secretary</div>
+                <div class="details">MIU CSE Club</div>
+                <a href="https://www.linkedin.com/in/afmjarif/" target="_blank" class="profile-btn">View Profile</a>
+            </div>
+        </div>
+    </div>
+
+       <!-- Program Schedule -->
+    <div class="section">
+        <div class="section-header">
+            <h2>Program Schedule</h2>
+            <p>Mark your calendar</p>
+        </div>
+        <div class="schedule-container">
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>Activity</th>
+                        <th>By Whom</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Introduction + Documentary</td><td>Sohaib Abdullah (Asst. Professor, CSE)</td><td>10:10 AM - 10:25 AM</td></tr>
+                    <tr><td>Speech 1</td><td>Dr. Md Mahedi Hasan (Postdoctoral Associate, Rockefeller University)</td><td>10:25 AM - 10:45 AM</td></tr>
+                    <tr><td>Speech 2</td><td>Belal Ahmed (CEO, BITSCo)</td><td>10:45 AM - 11:04 AM</td></tr>
+                    <tr><td>Speech 3 + Q&A</td><td>Munir Hasan (Digital Transformation Consultant, Daily Prothom Alo)</td><td>11:04 AM - 11:43 AM</td></tr>
+                    <tr><td>Speech 4 + Q&A</td><td>Dr. Muhammad Imadur Rahman (MD & CEO, BSCL)</td><td>11:43 AM - 12:22 PM</td></tr>
+                    <tr><td>Message</td><td>Dr. Muhammad Abdur Rob (Vice-Chancellor)</td><td>12:22 PM - 12:37 PM</td></tr>
+                    <tr><td>Message</td><td>Prof. Dr. Md. Mijanur Rahman (Head, CSE & Dean, SEST)</td><td>12:37 PM - 12:52 PM</td></tr>
+                    <tr><td>Interactive Activity + Prize</td><td>AFM Jarif (General Secretary, MIU CSE Club) & Ahsan Farabi (Lecturer, CSE)</td><td>12:52 PM - 01:36 PM</td></tr>
+                    <tr class="highlight"><td>Lunch + Prayer</td><td>—</td><td>01:40 PM - 02:30 PM</td></tr>
+                    <tr><td>Speech 5 + Practical</td><td>Jayed Ahsan Saad (Founder, Codepotro)</td><td>02:30 PM - 03:00 PM</td></tr>
+                    <tr><td>Speech 6</td><td>Md. Mosiuzzaman (CBO, Ahsan Tech)</td><td>03:01 PM - 03:25 PM</td></tr>
+                    <tr><td>Club Speech</td><td>Mehedy Hasan Rifat (President, MIU CSE Club)</td><td>03:26 PM - 03:35 PM</td></tr>
+                    <tr><td>Message</td><td>Md. Ershadul Haque Chowdhury (Head, Department of EEE)</td><td>03:36 PM - 03:45 PM</td></tr>
+                    <tr><td>Ending Speech</td><td>Dean & Head of CSE Dept.</td><td>03:46 PM - 04:00 PM</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Tech Team Section (3 Members) -->
+    <div class="section" style="background: white; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); padding: 60px 40px;">
+        <div class="section-header">
+            <h2>Tech Team</h2>
+            <p>Technical Support & Photography</p>
+        </div>
+        <div class="grid-3">
+            <div class="card" style="border-top: 4px solid var(--accent);">
+                <img src="assets/tech1.jpg" alt="Tech Team Member">
+                <h3>Saad Al Nafis Siddiky</h3>
+                <div class="title">Tech Lead</div>
+                <div class="details">Technical Support & Setup</div>
+            </div>
+            <div class="card" style="border-top: 4px solid var(--accent);">
+                <img src="assets/tech2.jpg" alt="Tech Team Member">
+                <h3>Md. Raihan</h3>
+                <div class="title">Main Photographer</div>
+                <div class="details">Photo Shoots & Coverage</div>
+            </div>
+            <div class="card" style="border-top: 4px solid var(--accent);">
+                <img src="assets/tech3.jpg" alt="Tech Team Member">
+                <h3>Tech Team Member 3</h3>
+                <div class="title">Technical Support</div>
+                <div class="details">Audio, Visuals & Systems</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Volunteer Section -->
+    <div class="section">
+        <div class="section-header">
+            <h2>Volunteer Team</h2>
+            <p>The backbone of the summit</p>
+        </div>
+        <div class="volunteer-grid">
+            <div class="volunteer-card"><img src="assets/vol1.jpg" alt="Vol 1"><h4>Volunteer 1</h4></div>
+            <div class="volunteer-card"><img src="assets/vol2.jpg" alt="Vol 2"><h4>Volunteer 2</h4></div>
+            <div class="volunteer-card"><img src="assets/vol3.jpg" alt="Vol 3"><h4>Volunteer 3</h4></div>
+            <div class="volunteer-card"><img src="assets/vol4.jpg" alt="Vol 4"><h4>Volunteer 4</h4></div>
+            <div class="volunteer-card"><img src="assets/vol5.jpg" alt="Vol 5"><h4>Volunteer 5</h4></div>
+            <div class="volunteer-card"><img src="assets/vol6.jpg" alt="Vol 6"><h4>Volunteer 6</h4></div>
+            <div class="volunteer-card"><img src="assets/vol7.jpg" alt="Vol 7"><h4>Volunteer 7</h4></div>
+            <div class="volunteer-card"><img src="assets/vol8.jpg" alt="Vol 8"><h4>Volunteer 8</h4></div>
+            <div class="volunteer-card"><img src="assets/vol9.jpg" alt="Vol 9"><h4>Volunteer 9</h4></div>
+            <div class="volunteer-card"><img src="assets/vol10.jpg" alt="Vol 10"><h4>Volunteer 10</h4></div>
+            <div class="volunteer-card"><img src="assets/vol11.jpg" alt="Vol 11"><h4>Volunteer 11</h4></div>
+            <div class="volunteer-card"><img src="assets/vol12.jpg" alt="Vol 12"><h4>Volunteer 12</h4></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
     <footer>
         <h3>MIU CSE CLUB</h3>
         <p>Creating Tech Leaders of Tomorrow</p>
-        <p>© 2026 MIU CSE Club. All rights reserved.</p>
-        
-        <div class="footer-links">
-            <a href="mailto:cse_club@manarat.ac.bd">📩 cse_club@manarat.ac.bd</a>
-            <a href="https://www.facebook.com/miucseclub/" target="_blank">🌐 Facebook Page</a>
-        </div>
-
-        <div class="footer-dev">
-            Developed by <a href="https://github.com/afmjarif" target="_blank">afm jarif</a>
-        </div>
+        <p style="margin-top: 15px;">© 2026 MIU CSE Club. All rights reserved.</p>
+        <p>Contact: cse_club@manarat.ac.bd</p>
+        <p style="margin-top: 20px; font-size: 0.9rem;">
+            Developed with 💙 by <a href="https://github.com/afmjarif" target="_blank">AFM Jarif</a>
+        </p>
     </footer>
 
-    <!-- Apps Script Logic -->
+    <!-- Apps Script for Live Data -->
     <script>
         const API_URL = "https://script.google.com/macros/s/AKfycbzY2-Vrn2tmgsLO8H1g6tOy7tTusEWT6ZyFcsWkf3C3Q2oVz1-RC-h_df0lTst9ph-aWA/exec";
 
-        // Get ID from URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const regId = urlParams.get('id');
+        function fetchStats() {
+            const oldScript = document.getElementById('jsonp-stats');
+            if (oldScript) oldScript.remove();
 
-        if (!regId) {
-            showInvalid("No Certificate ID Found in URL.");
-        } else {
-            // Fetch data via JSONP
             const script = document.createElement('script');
-            script.src = API_URL + "?action=verifyCertificate&id=" + encodeURIComponent(regId) + "&callback=renderResult";
+            script.id = 'jsonp-stats';
+            script.src = API_URL + "?action=getWebsiteData&callback=updateStats&_=" + new Date().getTime();
             document.body.appendChild(script);
         }
 
-        function renderResult(data) {
-            const card = document.getElementById('card');
-            const body = document.getElementById('body-bg');
-
-            if (data.success) {
-                // ✅ Success Animation
-                card.classList.add('animate-pop');
-                
-                card.innerHTML = `
-                    <div class="badge success-badge">✓ VERIFIED</div>
-                    <h1>Certificate Verified</h1>
-                    <h2>MIU CSE Club Presents AI Summit 2026</h2>
-                    <div class="tagline">The future of jobs and education in the age of AI</div>
-                    
-                    <div class="info-container">
-                        <div class="info-row"><span>Name</span> <span>${data.name}</span></div>
-                        <div class="info-row"><span>Registration ID</span> <span>${data.regId}</span></div>
-                        <div class="info-row"><span>Department</span> <span>${data.department}</span></div>
-                        <div class="info-row"><span>Batch</span> <span>${data.batch}</span></div>
-                        <div class="info-row"><span>Event Date</span> <span>${data.date}</span></div>
-                    </div>
-                    
-                    <a href="${data.certificateLink}" target="_blank" class="btn">📥 Download Certificate</a>
-                `;
-            } else {
-                showInvalid(data.message);
+        function updateStats(data) {
+            if (data && data.success) {
+                animateValue("total-reg", 0, data.stats.total, 1000);
+                animateValue("verified-reg", 0, data.stats.verified, 1000);
+                animateValue("checked-in", 0, data.stats.checkedIn, 1000);
             }
         }
 
-        function showInvalid(msg) {
-            const card = document.getElementById('card');
-            const body = document.getElementById('body-bg');
-
-            // ✅ Invalid Animation & Red Background
-            body.style.backgroundColor = "#FEE2E2"; // Light red
-            card.classList.add('animate-shake'); // Shake animation
-            
-            card.innerHTML = `
-                <div class="badge error-badge">✖ INVALID</div>
-                <h1 style="color:#991B1B;">Verification Failed</h1>
-                <p class="error-msg">${msg || "This certificate could not be verified in our database."}</p>
-                <p style="color:#666; font-size:14px;">If you believe this is a mistake, please contact the MIU CSE Club.</p>
-            `;
+        function animateValue(id, start, end, duration) {
+            const obj = document.getElementById(id);
+            if (!obj) return;
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start);
+                if (progress < 1) window.requestAnimationFrame(step);
+            };
+            window.requestAnimationFrame(step);
         }
+
+        fetchStats();
+        setInterval(fetchStats, 30000);
     </script>
 </body>
 </html>
